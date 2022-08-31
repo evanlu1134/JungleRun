@@ -29,10 +29,12 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "                                                        ",
+
       "    +           +                      mm                ",
       "    ==      ==   ====                  mm                   ",
       "             ^   ^   +   ^  +          mm  a        @        ",
       " ==========================   ================       ======    "
+
     ],
     [
       "                                      ",
@@ -92,6 +94,7 @@ const HERO_SPEED = 350;
       sprite("gorilla"),
       "enemy",
       area(),
+      // move(hero.pos.angle(enemy.pos), 1200),
       body(),
     ],
     "w": () => [
@@ -116,13 +119,12 @@ const HERO_SPEED = 350;
     fixed(),
   ])
 
-  // const health = add([
-  //   text("Health:" + hp),
-  //   scale(.7),
-  //   pos(0, 0),
-  //   fixed(),
-  // ])
-
+//   const gorilla = add([
+//     sprite("gorilla"),
+//     pos(enemy.pos),
+//     area(),
+//       move(hero.pos.angle(enemy.pos), 1200),
+// ])
   const hero = add([
     sprite("run"),
     pos(68, 5), // give it a starting postion 
@@ -245,14 +247,35 @@ scene("title", () => {
     fixed()
   ])
   let titleText = add([
-    text("Jungle Run" + "\n" + "\n" + "Start(Space)" + "\n" + "\n" + "How to Play"),
+    text("Jungle Run" + "\n \n" + " Tutorial(Enter)" + "\n \n" + "How to Play"),
     color(41, 171, 135),
     pos(width() / 1.8, height() / 2),
     origin("center"),
     scale(1),
     fixed(),
   ])
-  onKeyPress("space", () => {
+  onKeyPress("enter", () => {
+    go("tutorial")
+  })
+})
+
+scene("tutorial", () => {
+  let tutorialPage = add([
+    sprite("rain"),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(1),
+    fixed()
+  ])
+  let titleText = add([
+    text("-> Move Rigth" + "\n \n" + "<- Move Left" + "\n \n" + "Space to (jump)"+ "\n \n" + "Enter to play"),
+    color(41, 171, 135),
+    pos(width() / 1.8, height() / 2),
+    origin("center"),
+    scale(1),
+    fixed(),
+  ])
+  onKeyPress("enter", () => {
     go("game")
   })
 })
