@@ -12,12 +12,15 @@ loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
+loadSprite("rock", "images/rock.jpg")
 loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
 
 
 let score = 0;
 const HERO_SPEED = 350;
+const GOR_SPEED = 150;
+let currentS = GOR_SPEED;
 
 
 
@@ -29,10 +32,12 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "                                                        ",
-
       "    +           +                      mm                ",
-      "    ==      ==   ====                  mm                   ",
+      "                                      mm                   ",
       "             ^   ^   +   ^  +          mm  a        @        ",
+      "    +           +                                       ",
+      "    ==   #  ==   ====                    ####                  ",
+      "         #    ^   ^   +   ^  +     #     #  a        @        ",
       " ==========================   ================       ======    "
 
     ],
@@ -87,16 +92,20 @@ const HERO_SPEED = 350;
     "^": () => [
       sprite("s"),
       "enemy",
+      "snake",
       area(),
       body(),
     ],
 
     "+": () => [
       sprite("gorilla"),
+      "gor",
       "enemy",
       area(),
-      // move(hero.pos.angle(enemy.pos), 1200),
       body(),
+      {
+        speed: GOR_SPEED
+      }
     ],
     "w": () => [
       sprite("coin"),
@@ -149,6 +158,11 @@ const HERO_SPEED = 350;
     scale(2),
     "player"
   ])
+
+
+  action("gor", (g) => {
+    g.move(GOR_SPEED,0)
+  })
 
 
   const game_level = addLevel(maps[level], levelCfg)
@@ -255,12 +269,13 @@ scene("win", () => {
 })
 
 let music = play("Chill", {
-  volume: 3,
+  volume: 5,
   loop: true,
 })
 onKeyPress("m", () => {
 		music.pause()
 	})
+
 
 scene("title", () => {
   let titleScreen = add([
