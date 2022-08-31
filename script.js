@@ -116,7 +116,16 @@ let currentS = GOR_SPEED;
       area(),
       body(),
 
+    ],"#": () => [
+      sprite("rock"),
+      "block",
+      area(),
+      solid(),
+      body(),
+      scale(0.2)
     ],
+
+
   }
   const timer = add([
 		text(0),
