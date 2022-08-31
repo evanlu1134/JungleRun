@@ -212,14 +212,35 @@ scene("title", () => {
     fixed()
   ])
   let titleText = add([
-    text("Jungle Run" + "\n" + "\n" + "Start(Space)" + "\n" + "\n" + "How to Play"),
+    text("Jungle Run" + "\n \n" + " Tutorial(Enter)" + "\n \n" + "How to Play"),
     color(41, 171, 135),
     pos(width() / 1.8, height() / 2),
     origin("center"),
     scale(1),
     fixed(),
   ])
-  onKeyPress("space", () => {
+  onKeyPress("enter", () => {
+    go("tutorial")
+  })
+})
+
+scene("tutorial", () => {
+  let tutorialPage = add([
+    sprite("rain"),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(1),
+    fixed()
+  ])
+  let titleText = add([
+    text("-> Move Rigth" + "\n \n" + "<- Move Left" + "\n \n" + "Space to (jump)"+ "\n \n" + "Enter to play"),
+    color(41, 171, 135),
+    pos(width() / 1.8, height() / 2),
+    origin("center"),
+    scale(1),
+    fixed(),
+  ])
+  onKeyPress("enter", () => {
     go("game")
   })
 })
