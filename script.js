@@ -13,6 +13,7 @@ loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
 loadSprite("rock", "images/rock.jpg")
+loadSprite("HTP", "images/HTP.png")
 loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
 
@@ -34,7 +35,7 @@ let currentS = GOR_SPEED;
       "                                                        ",
       "    +           +                      mm                ",
       "                                      mm                   ",
-      "             ^   ^   +   ^  +          mm  a        @        ",
+      "             ^   ^   +   ^  +          mm                ",
       "    +           +                                       ",
       "    ==   #  ==   ====                    ####                  ",
       "         #    ^   ^   +   ^  +     #     #  a        @        ",
@@ -54,7 +55,7 @@ let currentS = GOR_SPEED;
       " ====================================  "
     ],
   ]
-  scene("game", ({ level } = { level: 0}) => {
+  scene("game", ({ level, time} = { level: 0, time:30}) => {
   let background = add([
     sprite("JUNGLE"),
     pos(width() / 2, height() / 2),
@@ -79,7 +80,8 @@ let currentS = GOR_SPEED;
       "block",
       area(),
       solid(),
-      "troll"
+      "troll",
+      
     ],
     "=": () => [
       sprite("grass"),
@@ -272,9 +274,7 @@ let music = play("Chill", {
   volume: 5,
   loop: true,
 })
-onKeyPress("m", () => {
-		music.pause()
-	})
+
 
 
 scene("title", () => {
@@ -307,12 +307,11 @@ scene("tutorial", () => {
     fixed()
   ])
   let titleText = add([
-    text("-> Move Rigth" + "\n \n" + "<- Move Left" + "\n \n" + "Space to (jump)"+ "\n \n" + "Enter to play"),
-    color(41, 171, 135),
-    pos(width() / 1.8, height() / 2),
+    sprite("HTP"),
+    pos(width() / 2, height() / 2),
     origin("center"),
     scale(1),
-    fixed(),
+    fixed()
   ])
   onKeyPress("enter", () => {
     go("game")
