@@ -1,25 +1,6 @@
 
 kaboom()
 
-loadSprite("grass", "images/grass.png");
-loadSprite("portal", "images/portal.png");
-loadSprite("s", "images/s.png");
-loadSprite("gorilla", "images/gorilla.png");
-loadSprite("gorilla", "images/gorilla.png");
-loadSprite("JUNGLE", "images/JUNGLE.jpg");
-loadSprite("trees", "images/trees.png");
-loadSprite("run", "images/run.png");
-loadSprite("rain", "images/rain.png");
-loadSprite("coin", "images/coin.png");
-loadSprite("steel", "images/steel.png");
-loadSprite("rock", "images/rock.jpg")
-loadSprite("spike", "images/spike.png");
-loadSound("junglemp3", "images/junglemp3.mp3");
-loadSound("Chill", "images/Chill.mp3");
-
-
-
-
 let score = 0;
 const HERO_SPEED = 350;
 
@@ -161,6 +142,7 @@ scene("game", ({ level } = { level: 0 }) => {
 
 
   }
+  //timer 
   const timer = add([
   	text(0),
   	pos(0, 0),
@@ -183,13 +165,7 @@ scene("game", ({ level } = { level: 0 }) => {
     fixed(),
   ])
 
-  //   const gorilla = add([
-  //     sprite("gorilla"),
-  //     pos(enemy.pos),
-  //     area(),
-  //       move(hero.pos.angle(enemy.pos), 1200),
-  // ])
-
+// hero 
   const hero = add([
     sprite("run"),
     pos(68, 5), // give it a starting postion 
@@ -265,48 +241,6 @@ scene("game", ({ level } = { level: 0 }) => {
   })
 })
 
-scene("lose", () => {
-  let loser = add([
-    sprite("trees"),
-    pos(width() / 2, height() / 2),
-    origin("center"),
-    scale(2),
-    fixed()
-  ])
-  add([
-    text("You Lose" + "\n" + "\n" + "Press Space to Retry"),
-    color(255, 5, 0),
-    origin("center"),
-    pos(width() / 2, height() / 2)
-  ])
-  keyPress("space", () => {
-    score = 0;
-    go("game")
-
-  })
-})
-scene("win", () => {
-  let winner = add([
-    sprite("trees"),
-    pos(width() / 2, height() / 2),
-    origin("center"),
-    scale(2),
-    fixed()
-  ])
-  add([
-    text("You Win!🎯" + "\n" + "You conquered the Jungle!"),
-    origin("center"),
-    pos(width() / 2, height() / 2),
-    scale(1),
-    fixed()
-  ])
-
-  keyPress("space", () => {
-    go("game")
-
-  })
-})
-
 
 let music = play("Chill", {
   volume: 5,
@@ -317,47 +251,8 @@ onKeyPress("m", () => {
 })
 
 
-scene("title", () => {
-  let titleScreen = add([
-    sprite("rain"),
-    pos(width() / 2, height() / 2),
-    origin("center"),
-    scale(1),
-    fixed()
-  ])
-  let titleText = add([
-    text("Jungle Run" + "\n \n" + " Tutorial(Enter)" + "\n \n" + "How to Play"),
-    color(41, 171, 135),
-    pos(width() / 1.8, height() / 2),
-    origin("center"),
-    scale(1),
-    fixed(),
-  ])
-  onKeyPress("enter", () => {
-    go("tutorial")
-  })
-})
-
-scene("tutorial", () => {
-  let tutorialPage = add([
-    sprite("rain"),
-    pos(width() / 2, height() / 2),
-    origin("center"),
-    scale(1),
-    fixed()
-  ])
-  let titleText = add([
-    text("-> Move Rigth" + "\n \n" + "<- Move Left" + "\n \n" + "Space to (jump)" + "\n \n" + "Enter to play"),
-    color(41, 171, 135),
-    pos(width() / 1.8, height() / 2),
-    origin("center"),
-    scale(1),
-    fixed(),
-  ])
-  onKeyPress("enter", () => {
-    go("game")
-  })
-})
 
 
-go("title")
+
+
+
