@@ -17,7 +17,6 @@ loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
 
 
-
 let score = 0;
 const HERO_SPEED = 350;
 const GOR_SPEED = 150;
@@ -52,7 +51,7 @@ let currentS = GOR_SPEED;
       " ====================================  "
     ],
   ]
-  scene("game", ({ level } = { level: 0 }) => {
+  scene("game", ({ level } = { level: 0}) => {
   let background = add([
     sprite("JUNGLE"),
     pos(width() / 2, height() / 2),
@@ -119,7 +118,21 @@ let currentS = GOR_SPEED;
 
     ],
   }
+  const timer = add([
+		text(0),
+		pos(0, 0),
+		fixed(),
+		{ time: 30},
+	])
 
+	timer.onUpdate(() => {
+		timer.time -= dt()
+		timer.text = "Timer:" + timer.time.toFixed(2)
+    if(timer.time <= 0){
+      go("lose")
+    }
+	})
+  
   const scoreboard = add([
     text("Score:" + score),
     scale(.7),
@@ -133,6 +146,7 @@ let currentS = GOR_SPEED;
 //     area(),
 //       move(hero.pos.angle(enemy.pos), 1200),
 // ])
+
   const hero = add([
     sprite("run"),
     pos(68, 5), // give it a starting postion 
@@ -220,7 +234,6 @@ onKeyDown("right", () => {
     add([
       text("You Lose" + "\n" + "\n" + "Press Space to Retry"),
       color(255, 5, 0),
-
       origin("center"),
       pos(width() / 2, height() / 2)
     ])
