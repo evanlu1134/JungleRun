@@ -12,13 +12,10 @@ loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
-<<<<<<< HEAD
-
-=======
 loadSprite("rock", "images/rock.jpg")
 loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
->>>>>>> ef3ef7bac85cd10129cdee7696009e063d728151
+
 
 
 let score = 0;
@@ -36,15 +33,12 @@ let currentS = GOR_SPEED;
       "                                                        ",
       "                                                        ",
       "                                                        ",
-<<<<<<< HEAD
       "    +           +                      mm                ",
       "                                      mm                   ",
       "             ^   ^   +   ^  +          mm  a        @        ",
-=======
       "    +           +                                       ",
       "    ==   #  ==   ====                    ####                  ",
       "         #    ^   ^   +   ^  +     #     #  a        @        ",
->>>>>>> ef3ef7bac85cd10129cdee7696009e063d728151
       " ==========================   ================       ======    "
 
     ],
@@ -260,8 +254,6 @@ scene("win", () => {
 
   })
 })
-<<<<<<< HEAD
-=======
 
 let music = play("Chill", {
   volume: 5,
@@ -271,7 +263,7 @@ onKeyPress("m", () => {
 		music.pause()
 	})
 
->>>>>>> ef3ef7bac85cd10129cdee7696009e063d728151
+
 scene("title", () => {
   let titleScreen = add([
     sprite("rain"),
