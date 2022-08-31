@@ -10,6 +10,9 @@ loadSprite("JUNGLE", "images/JUNGLE.jpg");
 loadSprite("trees", "images/trees.png");
 loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
+loadSprite("coin","images/coin.png");
+loadSprite("steel","images/steel.png");
+
 
 
 let score = 0;
@@ -25,9 +28,9 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "                                                        ",
-      "    +           +                      ==                 ",
-      "    ==      ==   ====                  ==                   ",
-      "             ^   ^   +   ^  +          ==            @    ",
+      "    +           +                      mm                ",
+      "    ==      ==   ====                  mm                   ",
+      "             ^   ^   +   ^  +          mm  a        @        ",
       " ==========================   ================       ======    "
     ],
     [
@@ -39,7 +42,7 @@ const HERO_SPEED = 350;
       "                                      ",
       "    +     +      +                    ",
       "    =========   ====       ==         ",
-      "                                      ",
+      "                                  w   ",
       " ====================================  "
     ],
   ]
@@ -63,6 +66,13 @@ const HERO_SPEED = 350;
       solid(),
       "portal"
     ],
+    "a": () => [
+      sprite("portal"),
+      "block",
+      area(),
+      solid(),
+      "troll"
+    ],
     "=": () => [
       sprite("grass"),
       "block",
@@ -83,6 +93,19 @@ const HERO_SPEED = 350;
       "enemy",
       area(),
       body(),
+    ],
+    "w": () => [
+      sprite("coin"),
+      area(),
+      body(),
+      "win"
+    ],
+    "m": () => [
+      sprite("steel"),
+      "block",
+      area(),
+      body(),
+
     ],
   }
 
@@ -125,13 +148,23 @@ onKeyDown("right", () => {
 
 
   //player moving levels logic
-  hero.collides("portal", () => {
+  hero.onCollide("portal", () => {
     //go to scene, not maps
     go("game", {
       level: level + 1
       //map is an array thus add level to progress next
     })
   })
+  hero.onCollide("troll", () => {
+    go("game", {
+      level: level = 0
+    })
+  })
+
+  hero.onCollide("win", () => {
+    go("win")
+  })
+
 
   //temp space to set interval time for gorilla jump and down follow line 95
 
@@ -159,8 +192,8 @@ onKeyDown("right", () => {
       go("lose")
     }
   })
+})
 
-}) /
   scene("lose", () => {
     let loser = add([
       sprite("trees"),
