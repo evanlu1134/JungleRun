@@ -1,3 +1,4 @@
+
 kaboom()
 
 loadSprite("grass", "images/grass.png");
@@ -8,47 +9,41 @@ loadSprite("gorilla", "images/gorilla.png");
 loadSprite("JUNGLE", "images/JUNGLE.jpg");
 loadSprite("trees", "images/trees.png");
 loadSprite("run", "images/run.png");
-// loadSprite("Rain", "images/Rain.gif");
+loadSprite("rain","images/rain.png");
+
 
 let score = 0;
-// let hp = 3;
-
-// // loadSprite("plx-5", "sprites/plx-5.png");
-// // add([
-// //   sprite("plx-5", {width: width(), height: height()})
-// // ]);
-
 const HERO_SPEED = 350;
 
 
-scene("game", ({ level } = { level: 0 }) => {
+
   const maps = [
     [
-      "                                   ",
-      "                                   ",
-      "                                   ",
-      "                                   ",
-      "                                  ",
-      "                                  ",
-      "    +           +               ",
-      "    ==      ==   ====               ",
+      "                                        ",
+      "                                        ",
+      "                                        ",
+      "                                        ",
+      "                                        ",
+      "                                        ",
+      "    +           +                       ",
+      "    ==      ==   ====                   ",
       "             ^   ^   +   ^  +      @    ",
-      " ===================================="
+      " =====================================  "
     ],
     [
-      "                                   ",
-      "                                   ",
-      "                                   ",
-      "                                   ",
-      "                                  ",
-      "                                  ",
-      "    +     +      +               ",
-      "    =========   ====       ==        ",
-      "                                   @  ",
-      " ===================================="
+      "                                      ",
+      "                                      ",
+      "                                      ",
+      "                                      ",
+      "                                      ",
+      "                                      ",
+      "    +     +      +                    ",
+      "    =========   ====       ==         ",
+      "                                      ",
+      " ===================================  "
     ],
   ]
-
+  scene("game", ({ level } = { level: 0 }) => {
   let background = add([
     sprite("JUNGLE"),
     pos(width() / 2, height() / 2),
@@ -126,7 +121,7 @@ onKeyDown("right", () => {
 	
 })
 
-  
+
 
   //player moving levels logic
   hero.collides("portal", () => {
@@ -147,7 +142,7 @@ onKeyDown("right", () => {
       hero.jump(900, 0)
     }
   })
-  hero.collides("enemy", (enemy) => {
+  hero.onCollide("enemy", (enemy) => {
     if (enemy.pos.y < hero.pos.y) {
       go("lose")
     } else {
@@ -157,7 +152,7 @@ onKeyDown("right", () => {
       hero.jump(1000)
     }
   })
-  hero.action(() => {
+  hero.onUpdate(() => {
     camPos(hero.pos)
     if (hero.pos.y > 2000) {
       go("lose")
@@ -166,7 +161,7 @@ onKeyDown("right", () => {
 
 }) /
   scene("lose", () => {
-    let background = add([
+    let loser = add([
       sprite("trees"),
       pos(width() / 2, height() / 2),
       origin("center"),
@@ -187,7 +182,7 @@ onKeyDown("right", () => {
     })
   })
 scene("win", () => {
-  let background = add([
+  let winner = add([
     sprite("trees"),
     pos(width() / 2, height() / 2),
     origin("center"),
@@ -209,7 +204,7 @@ scene("win", () => {
 })
 scene("title", () => {
   let titleScreen = add([
-    sprite("Rain"),
+    sprite("rain"),
     pos(width() / 2, height() / 2),
     origin("center"),
     scale(1),
@@ -223,20 +218,10 @@ scene("title", () => {
     scale(1),
     fixed(),
   ])
-  //    let img = add([
-  //   sprite("bean"),
-  //   color(41,171,135),
-  //   pos(width() / 2, height() / 3),
-  //   origin("center"),
-  //   scale(1),
-  //   fixed()
-  // ])
   onKeyPress("space", () => {
     go("game")
   })
 })
 
 
-go("game")
-
-
+go("title")
