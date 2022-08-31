@@ -13,7 +13,8 @@ loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
 loadSprite("rock", "images/rock.png")
-
+loadSound("junglemp3", "images/junglemp3.mp3");
+loadSound("Chill", "images/Chill.mp3");
 
 
 let score = 0;
@@ -33,6 +34,7 @@ const HERO_SPEED = 350;
       "    ==   #  ==   ====                    ##                   ",
       "         #    ^   ^   +   ^  +     #     ##  a        @        ",
       " ==========================   ================       ======    "
+
     ],
     [
       "                                      ",
@@ -55,7 +57,7 @@ const HERO_SPEED = 350;
     scale(2.2),
     fixed()
   ])
-
+  
   const levelCfg = {
     width: 60,
     height: 70,
@@ -93,6 +95,7 @@ const HERO_SPEED = 350;
       sprite("gorilla"),
       "enemy",
       area(),
+      // move(hero.pos.angle(enemy.pos), 1200),
       body(),
     ],
     "w": () => [
@@ -124,13 +127,12 @@ const HERO_SPEED = 350;
     fixed(),
   ])
 
-  // const health = add([
-  //   text("Health:" + hp),
-  //   scale(.7),
-  //   pos(0, 0),
-  //   fixed(),
-  // ])
-
+//   const gorilla = add([
+//     sprite("gorilla"),
+//     pos(enemy.pos),
+//     area(),
+//       move(hero.pos.angle(enemy.pos), 1200),
+// ])
   const hero = add([
     sprite("run"),
     pos(68, 5), // give it a starting postion 
@@ -244,6 +246,15 @@ scene("win", () => {
 
   })
 })
+
+let music = play("Chill", {
+  volume: 3,
+  loop: true,
+})
+onKeyPress("m", () => {
+		music.pause()
+	})
+
 scene("title", () => {
   let titleScreen = add([
     sprite("rain"),
