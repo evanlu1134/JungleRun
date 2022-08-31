@@ -12,7 +12,7 @@ loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
-loadSprite("rock", "images/rock.png")
+loadSprite("rock", "images/rock.jpg")
 loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
 
@@ -30,9 +30,9 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "                                                        ",
-      "    +           +                        ##                ",
-      "    ==   #  ==   ====                    ##                   ",
-      "         #    ^   ^   +   ^  +     #     ##  a        @        ",
+      "    +           +                                       ",
+      "    ==   #  ==   ====                    ####                  ",
+      "         #    ^   ^   +   ^  +     #     #  a        @        ",
       " ==========================   ================       ======    "
 
     ],
@@ -248,7 +248,7 @@ scene("win", () => {
 })
 
 let music = play("Chill", {
-  volume: 3,
+  volume: 5,
   loop: true,
 })
 onKeyPress("m", () => {
