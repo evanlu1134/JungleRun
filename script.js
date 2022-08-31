@@ -12,6 +12,7 @@ loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
+loadSprite("rock", "images/rock.png")
 
 
 
@@ -28,9 +29,9 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "                                                        ",
-      "    +           +                      mm                ",
-      "    ==      ==   ====                  mm                   ",
-      "             ^   ^   +   ^  +          mm  a        @        ",
+      "    +           +                        ##                ",
+      "    ==   #  ==   ====                    ##                   ",
+      "         #    ^   ^   +   ^  +     #     ##  a        @        ",
       " ==========================   ================       ======    "
     ],
     [
@@ -40,9 +41,9 @@ const HERO_SPEED = 350;
       "                                      ",
       "                                      ", 
       "                                      ",
-      "    +     +      +                    ",
-      "    =========   ====       ==         ",
-      "                                  w   ",
+      "    +     +      +             #       ",
+      "    =========   ====       ==  #       ",
+      "                               #   w   ",
       " ====================================  "
     ],
   ]
@@ -107,6 +108,13 @@ const HERO_SPEED = 350;
       body(),
 
     ],
+    "#": () => [
+      sprite("rock"),
+      "rock",
+      area(),
+      body(),
+      scale(0.2)
+    ]
   }
 
   const scoreboard = add([
