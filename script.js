@@ -26,9 +26,10 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "    +           +                      ==                 ",
-      "    ==      ==   ====                  ==                   ",
+      "    ==                       ==                   ",
       "             ^   ^   +   ^  +          ==            @    ",
-      " ==========================   ================       ======    "
+      " =================!!========   ================       ======    ",
+      " ===========================   ================       ======    "
     ],
     [
       "                                      ",
@@ -82,6 +83,7 @@ const HERO_SPEED = 350;
       sprite("gorilla"),
       "enemy",
       area(),
+      // move(hero.pos.angle(enemy.pos), 1200),
       body(),
     ],
   }
@@ -93,13 +95,12 @@ const HERO_SPEED = 350;
     fixed(),
   ])
 
-  // const health = add([
-  //   text("Health:" + hp),
-  //   scale(.7),
-  //   pos(0, 0),
-  //   fixed(),
-  // ])
-
+//   const gorilla = add([
+//     sprite("gorilla"),
+//     pos(enemy.pos),
+//     area(),
+//       move(hero.pos.angle(enemy.pos), 1200),
+// ])
   const hero = add([
     sprite("run"),
     pos(68, 5), // give it a starting postion 
