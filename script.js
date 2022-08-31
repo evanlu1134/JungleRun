@@ -10,6 +10,9 @@ loadSprite("JUNGLE", "images/JUNGLE.jpg");
 loadSprite("trees", "images/trees.png");
 loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
+loadSprite("coin","images/coin.png");
+loadSprite("steel","images/steel.png");
+
 
 
 let score = 0;
@@ -25,11 +28,12 @@ const HERO_SPEED = 350;
       "                                                        ",
       "                                                        ",
       "                                                        ",
-      "    +           +                      ==                 ",
-      "    ==                       ==                   ",
-      "             ^   ^   +   ^  +          ==            @    ",
-      " =================!!========   ================       ======    ",
-      " ===========================   ================       ======    "
+
+      "    +           +                      mm                ",
+      "    ==      ==   ====                  mm                   ",
+      "             ^   ^   +   ^  +          mm  a        @        ",
+      " ==========================   ================       ======    "
+
     ],
     [
       "                                      ",
@@ -40,7 +44,7 @@ const HERO_SPEED = 350;
       "                                      ",
       "    +     +      +                    ",
       "    =========   ====       ==         ",
-      "                                      ",
+      "                                  w   ",
       " ====================================  "
     ],
   ]
@@ -64,6 +68,13 @@ const HERO_SPEED = 350;
       solid(),
       "portal"
     ],
+    "a": () => [
+      sprite("portal"),
+      "block",
+      area(),
+      solid(),
+      "troll"
+    ],
     "=": () => [
       sprite("grass"),
       "block",
@@ -85,6 +96,19 @@ const HERO_SPEED = 350;
       area(),
       // move(hero.pos.angle(enemy.pos), 1200),
       body(),
+    ],
+    "w": () => [
+      sprite("coin"),
+      area(),
+      body(),
+      "win"
+    ],
+    "m": () => [
+      sprite("steel"),
+      "block",
+      area(),
+      body(),
+
     ],
   }
 
@@ -126,13 +150,23 @@ onKeyDown("right", () => {
 
 
   //player moving levels logic
-  hero.collides("portal", () => {
+  hero.onCollide("portal", () => {
     //go to scene, not maps
     go("game", {
       level: level + 1
       //map is an array thus add level to progress next
     })
   })
+  hero.onCollide("troll", () => {
+    go("game", {
+      level: level = 0
+    })
+  })
+
+  hero.onCollide("win", () => {
+    go("win")
+  })
+
 
   //temp space to set interval time for gorilla jump and down follow line 95
 
@@ -160,8 +194,8 @@ onKeyDown("right", () => {
       go("lose")
     }
   })
+})
 
-}) /
   scene("lose", () => {
     let loser = add([
       sprite("trees"),
@@ -213,14 +247,35 @@ scene("title", () => {
     fixed()
   ])
   let titleText = add([
-    text("Jungle Run" + "\n" + "\n" + "Start(Space)" + "\n" + "\n" + "How to Play"),
+    text("Jungle Run" + "\n \n" + " Tutorial(Enter)" + "\n \n" + "How to Play"),
     color(41, 171, 135),
     pos(width() / 1.8, height() / 2),
     origin("center"),
     scale(1),
     fixed(),
   ])
-  onKeyPress("space", () => {
+  onKeyPress("enter", () => {
+    go("tutorial")
+  })
+})
+
+scene("tutorial", () => {
+  let tutorialPage = add([
+    sprite("rain"),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(1),
+    fixed()
+  ])
+  let titleText = add([
+    text("-> Move Rigth" + "\n \n" + "<- Move Left" + "\n \n" + "Space to (jump)"+ "\n \n" + "Enter to play"),
+    color(41, 171, 135),
+    pos(width() / 1.8, height() / 2),
+    origin("center"),
+    scale(1),
+    fixed(),
+  ])
+  onKeyPress("enter", () => {
     go("game")
   })
 })
