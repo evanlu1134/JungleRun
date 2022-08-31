@@ -19,6 +19,8 @@ loadSound("Chill", "images/Chill.mp3");
 
 let score = 0;
 const HERO_SPEED = 350;
+const GOR_SPEED = 150;
+let currentS = GOR_SPEED;
 
 
 
@@ -87,16 +89,20 @@ const HERO_SPEED = 350;
     "^": () => [
       sprite("s"),
       "enemy",
+      "snake",
       area(),
       body(),
     ],
 
     "+": () => [
       sprite("gorilla"),
+      "gor",
       "enemy",
       area(),
-      // move(hero.pos.angle(enemy.pos), 1200),
       body(),
+      {
+        speed: GOR_SPEED
+      }
     ],
     "w": () => [
       sprite("coin"),
@@ -141,6 +147,14 @@ const HERO_SPEED = 350;
     scale(2),
     "player"
   ])
+
+
+  action("gor", (g) => {
+    g.move(GOR_SPEED,0)
+  })
+
+ 
+ 
 
 
   const game_level = addLevel(maps[level], levelCfg)
