@@ -9,53 +9,69 @@ loadSprite("gorilla", "images/gorilla.png");
 loadSprite("JUNGLE", "images/JUNGLE.jpg");
 loadSprite("trees", "images/trees.png");
 loadSprite("run", "images/run.png");
-loadSprite("rain","images/rain.png");
-loadSprite("coin","images/coin.png");
-loadSprite("steel","images/steel.png");
+loadSprite("rain", "images/rain.png");
+loadSprite("coin", "images/coin.png");
+loadSprite("steel", "images/steel.png");
 loadSprite("rock", "images/rock.jpg")
 loadSprite("HTP", "images/HTP.png")
+loadSprite("spike", "images/spike.png");
 loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
 
 
+
+
 let score = 0;
-const HERO_SPEED = 350;
+let HERO_SPEED = 350;
 const GOR_SPEED = 150;
 let currentS = GOR_SPEED;
 
+const maps = [
+  [
+    "                                                                                                       ",
+    "                                                                                                       ",
+    "                                                                                                       ",
+    "                                                                                                       ",
+    "                                                                                                       ",
+    "                                                                                                       ",
+    "      +  #   +   + ^                                                                                   ", 
+    "         #       ====                    ####                                                          ",
+    " c                    +   ^      + #     #  a                               ^               @          ",
+    " $$$$(( $$$$$$$$$$$$$$$$$$$$$     ($$$$$$$$$$$$$$$$     (  $$$$$  $$$$$ ((( $$$$$$$  ^                 ",
+    " ===========================   ================       ======  ===== ==== ========= ====      ====   "
 
+  ],
+  [
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "    +           +                      mm                ",
+    "                                      mm                   ",
+    "             ^   ^   +   ^  +          mm                ",
+    "    +           +                                       ",
+    "    ==   #  ==   ====                                    ",
+    "      ^   ^   +   ^  +                       ",
+    " ==========================   ===============      ======    "
 
-  const maps = [
-    [
-      "                                                        ",
-      "                                                        ",
-      "                                                        ",
-      "                                                        ",
-      "                                                        ",
-      "                                                        ",
-      "    +           +                      mm                ",
-      "                                      mm                   ",
-      "             ^   ^   +   ^  +          mm                ",
-      "    +           +                                       ",
-      "    ==   #  ==   ====                    ####                  ",
-      "         #    ^   ^   +   ^  +     #     #  a        @        ",
-      " ==========================   ================       ======    "
+  ],
+  [
+    "                                      ",
+    "                                      ",
+    "                                      ",
+    "                                      ",
+    "                                      ",
+    "                                      ",
+    "    +     +      +                    ",
+    "    =========   ====       ==         ",
+    "                               w   ",
+    " ====================================  "
+  ],
+]
+scene("game", ({ level } = { level: 0 }) => {
 
-    ],
-    [
-      "                                      ",
-      "                                      ",
-      "                                      ",
-      "                                      ",
-      "                                      ", 
-      "                                      ",
-      "    +     +      +                    ",
-      "    =========   ====       ==         ",
-      "                                  w   ",
-      " ====================================  "
-    ],
-  ]
-  scene("game", ({ level, time} = { level: 0, time:30}) => {
   let background = add([
     sprite("JUNGLE"),
     pos(width() / 2, height() / 2),
@@ -75,20 +91,26 @@ let currentS = GOR_SPEED;
       solid(),
       "portal"
     ],
-    "a": () => [
+    "t": () => [
       sprite("portal"),
       "block",
       area(),
       solid(),
       "troll",
-      
     ],
     "=": () => [
       sprite("grass"),
       "block",
       area(),
-      solid(), 
-      // body(),
+      solid(),
+      scale(1)
+    ],
+    "$": () => [
+      sprite("grass"),
+      "block",
+      area(),
+      body(),
+      scale(1)
     ],
 
     "^": () => [
@@ -115,29 +137,46 @@ let currentS = GOR_SPEED;
       body(),
       "win"
     ],
-    "m": () => [
+    "": () => [
       sprite("steel"),
       "block",
       area(),
       body(),
 
+    ], "#": () => [
+      sprite("rock"),
+      "block",
+      area(),
+      solid(),
+      body(),
+      scale(0.2)
     ],
+    
+    "(": () => [
+      sprite("spike"),
+      "spikes",
+      area(),
+      solid(),
+      body(),
+    ],
+
+
   }
   const timer = add([
-		text(0),
-		pos(0, 0),
-		fixed(),
-		{ time: 30},
-	])
+  	text(0),
+  	pos(0, 0),
+  	fixed(),
+  	{ time: 30},
+  ])
 
-	timer.onUpdate(() => {
-		timer.time -= dt()
-		timer.text = "Timer:" + timer.time.toFixed(2)
-    if(timer.time <= 0){
+  timer.onUpdate(() => {
+  	timer.time -= dt()
+  	timer.text = "Timer:" + timer.time.toFixed(2)
+    if (timer.time <= 0){
       go("lose")
     }
-	})
-  
+  }) 
+
   const scoreboard = add([
     text("Score:" + score),
     scale(.7),
@@ -145,12 +184,12 @@ let currentS = GOR_SPEED;
     fixed(),
   ])
 
-//   const gorilla = add([
-//     sprite("gorilla"),
-//     pos(enemy.pos),
-//     area(),
-//       move(hero.pos.angle(enemy.pos), 1200),
-// ])
+  //   const gorilla = add([
+  //     sprite("gorilla"),
+  //     pos(enemy.pos),
+  //     area(),
+  //       move(hero.pos.angle(enemy.pos), 1200),
+  // ])
 
   const hero = add([
     sprite("run"),
@@ -163,7 +202,7 @@ let currentS = GOR_SPEED;
 
 
   action("gor", (g) => {
-    g.move(GOR_SPEED,0)
+    g.move(GOR_SPEED, 0)
   })
 
 
@@ -173,11 +212,11 @@ let currentS = GOR_SPEED;
   //   hero.move(HERO_SPEED, 0) // the first one is the x axis, y on the rght
   // })
 
-onKeyDown("right", () => {
-	hero.flipX(false)
-	hero.move(HERO_SPEED, 0)
-	
-})
+  onKeyDown("right", () => {
+    hero.flipX(false)
+    hero.move(HERO_SPEED, 0)
+
+  })
 
 
 
@@ -186,13 +225,13 @@ onKeyDown("right", () => {
     //go to scene, not maps
     go("game", {
       level: level + 1
+    })
       //map is an array thus add level to progress next
-    })
   })
+
   hero.onCollide("troll", () => {
-    go("game", {
-      level: level = 0
-    })
+    go("game")
+
   })
 
   hero.onCollide("win", () => {
@@ -220,6 +259,10 @@ onKeyDown("right", () => {
       hero.jump(1000)
     }
   })
+  hero.onCollide("spikes", (enemy) => {
+      go("lose")
+    
+  })
   hero.onUpdate(() => {
     camPos(hero.pos)
     if (hero.pos.y > 2000) {
@@ -228,26 +271,27 @@ onKeyDown("right", () => {
   })
 })
 
-  scene("lose", () => {
-    let loser = add([
-      sprite("trees"),
-      pos(width() / 2, height() / 2),
-      origin("center"),
-      scale(2),
-      fixed()
-    ])
-    add([
-      text("You Lose" + "\n" + "\n" + "Press Space to Retry"),
-      color(255, 5, 0),
-      origin("center"),
-      pos(width() / 2, height() / 2)
-    ])
-    keyPress("space", () => {
-      score = 0;
-      go("game")
+scene("lose", () => {
+  let loser = add([
+    sprite("trees"),
+    pos(width() / 2, height() / 2),
+    origin("center"),
+    scale(2),
+    fixed()
+  ])
+  add([
+    text("You Lose" + "\n" + "\n" + "Press Space to Retry"),
+    color(255, 5, 0),
+    origin("center"),
+    pos(width() / 2, height() / 2)
+  ])
+  keyPress("space", () => {
+    score = 0;
+    maps[level] = level
+    go("game")
 
-    })
   })
+})
 scene("win", () => {
   let winner = add([
     sprite("trees"),
@@ -270,12 +314,11 @@ scene("win", () => {
   })
 })
 
+
 let music = play("Chill", {
   volume: 5,
   loop: true,
 })
-
-
 
 scene("title", () => {
   let titleScreen = add([
@@ -286,7 +329,7 @@ scene("title", () => {
     fixed()
   ])
   let titleText = add([
-    text("Jungle Run" + "\n \n" + " Tutorial(Enter)" + "\n \n" + "How to Play"),
+    text("Jungle Run" + "\n \n" + " Tutorial(Enter)"),
     color(41, 171, 135),
     pos(width() / 1.8, height() / 2),
     origin("center"),
@@ -299,20 +342,20 @@ scene("title", () => {
 })
 
 scene("tutorial", () => {
-  let tutorialPage = add([
+    add([
     sprite("rain"),
     pos(width() / 2, height() / 2),
     origin("center"),
     scale(1),
-    fixed()
+    fixed(),
   ])
-  let titleText = add([
+  let tutorialPage = add([
     sprite("HTP"),
     pos(width() / 2, height() / 2),
     origin("center"),
     scale(1),
     fixed()
-  ])
+  ])  
   onKeyPress("enter", () => {
     go("game")
   })
