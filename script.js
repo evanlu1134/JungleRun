@@ -12,9 +12,7 @@ loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
-loadSprite("rock", "images/rock.png")
-loadSound("junglemp3", "images/junglemp3.mp3");
-loadSound("Chill", "images/Chill.mp3");
+
 
 
 let score = 0;
@@ -45,9 +43,9 @@ let currentS = GOR_SPEED;
       "                                      ",
       "                                      ", 
       "                                      ",
-      "    +     +      +             #       ",
-      "    =========   ====       ==  #       ",
-      "                               #   w   ",
+      "    +     +      +                    ",
+      "    =========   ====       ==         ",
+      "                                  w   ",
       " ====================================  "
     ],
   ]
@@ -59,7 +57,7 @@ let currentS = GOR_SPEED;
     scale(2.2),
     fixed()
   ])
-  
+
   const levelCfg = {
     width: 60,
     height: 70,
@@ -117,13 +115,6 @@ let currentS = GOR_SPEED;
       body(),
 
     ],
-    "#": () => [
-      sprite("rock"),
-      "rock",
-      area(),
-      body(),
-      scale(0.2)
-    ]
   }
 
   const scoreboard = add([
@@ -152,9 +143,6 @@ let currentS = GOR_SPEED;
   action("gor", (g) => {
     g.move(GOR_SPEED,0)
   })
-
- 
- 
 
 
   const game_level = addLevel(maps[level], levelCfg)
@@ -260,15 +248,6 @@ scene("win", () => {
 
   })
 })
-
-let music = play("Chill", {
-  volume: 3,
-  loop: true,
-})
-onKeyPress("m", () => {
-		music.pause()
-	})
-
 scene("title", () => {
   let titleScreen = add([
     sprite("rain"),
