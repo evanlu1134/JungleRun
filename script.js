@@ -22,8 +22,7 @@ loadSound("Chill", "images/Chill.mp3");
 
 let score = 0;
 const HERO_SPEED = 350;
-const GOR_SPEED = 150;
-let currentS = GOR_SPEED;
+
 
 
 
@@ -63,7 +62,22 @@ scene("game", ({ level } = { level: 0 }) => {
     scale(2.2),
     fixed()
   ])
-
+  function patrol(speed = 60, dir = 1) {
+    return {
+      id: "patrol",
+      require: [ "pos", "area", ],
+      add() {
+        this.on("collide", (obj, col) => {
+          if (col.isLeft() || col.isRight()) {
+            dir = -dir
+          }
+        })
+      },
+      update() {
+        this.move(speed * dir, 0)
+      },
+    }
+  }
   const levelCfg = {
     width: 60,
     height: 70,
@@ -111,10 +125,10 @@ scene("game", ({ level } = { level: 0 }) => {
       "gor",
       "enemy",
       area(),
+      solid(),
+      patrol(),
       body(),
-      {
-        speed: GOR_SPEED
-      }
+    
     ],
     "b": () => [
       sprite("coin"),
@@ -184,11 +198,6 @@ scene("game", ({ level } = { level: 0 }) => {
     scale(2),
     "player"
   ])
-
-
-  action("gor", (g) => {
-    g.move(GOR_SPEED, 0)
-  })
 
 
   const game_level = addLevel(maps[level], levelCfg)
