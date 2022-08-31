@@ -12,6 +12,7 @@ loadSprite("run", "images/run.png");
 loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
+loadSound("junglemp3", "images/junglemp3.mp3");
 
 
 
@@ -54,7 +55,6 @@ const HERO_SPEED = 350;
     scale(2.2),
     fixed()
   ])
-
   const levelCfg = {
     width: 60,
     height: 70,
