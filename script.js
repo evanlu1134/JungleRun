@@ -13,8 +13,7 @@ loadSprite("rain","images/rain.png");
 loadSprite("coin","images/coin.png");
 loadSprite("steel","images/steel.png");
 loadSound("junglemp3", "images/junglemp3.mp3");
-
-
+loadSound("Chill", "images/Chill.mp3");
 
 let score = 0;
 const HERO_SPEED = 350;
@@ -57,6 +56,7 @@ const HERO_SPEED = 350;
     scale(2.2),
     fixed()
   ])
+  
   const levelCfg = {
     width: 60,
     height: 70,
@@ -238,6 +238,15 @@ scene("win", () => {
 
   })
 })
+
+let music = play("Chill", {
+  volume: 3,
+  loop: true,
+})
+onKeyPress("m", () => {
+		music.pause()
+	})
+
 scene("title", () => {
   let titleScreen = add([
     sprite("rain"),
