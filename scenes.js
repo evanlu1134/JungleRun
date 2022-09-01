@@ -11,6 +11,7 @@ scene("win", () => {
     add([
       text("You Win!🎯" + "\n" + "You conquered the Jungle!"),
       origin("center"),
+      color(hsl2rgb((score * 10) / 255, 0.6, 0.7)),
       pos(width() / 2, height() / 2),
       scale(1),
       fixed()
@@ -80,6 +81,7 @@ scene("win", () => {
     ])
     keyPress("space", () => {
       score = 0;
+
       go("game")
   
     })

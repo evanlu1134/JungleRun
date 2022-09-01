@@ -4,32 +4,51 @@ kaboom()
 let score = 0;
 const HERO_SPEED = 350;
 
+
+
+
 const maps = [
   [
-    "                                                                                                       ",
-    "                                                                                                       ",
-    "                                                                                                       ",
-    "                                                                                                       ",
-    "                                                                                                       ",
-    "                                                                                                       ",
-    "      +  #   +   + ^                                                                                   ", 
-    "         #       ====                    ####                                                          ",
-    "                      +   ^      + #     #  a                               ^               @          ",
-    " $$$$(( $$$$$$$$$$$$$$$$$$$$$     ($$$$$$$$$$$$$$$$     (  $$$$$  $$$$$ ((( $$$$$$$  ^                 ",
-    " ===========================   ================       ======  ===== ==== ========= ====      ====   "
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "      +  o   +   + s                                                                                    ", 
+    "         o       ====                    ooooo                                                          ",
+    "                    +   s      + o     o     t                            s                             ",
+    " $$$$^^ $$$$$$$$$$$$$$$$$$$$$     ^$$$$$$$$$$$$$$$$     ^  $$$$$  $$$$$ ^^^ $$$$$$$  s       @          ",
+    " ===========================   ================       ======  ===== ==== ========= ====      ====       "
 
   ],
   [
-    "                                      ",
-    "                                      ",
-    "                                      ",
-    "                                      ",
-    "                                      ",
-    "                                      ",
-    "    +     +      +                    ",
-    "    =========   ====       ==         ",
-    "                                  b   ",
+    "                                       ",
+    "                                       ",
+    "                                       ",
+    "                                       ",
+    "                                       ",
+    "                                       ",
+    "    +     +      +                     ",
+    "    =========   ====       ==          ",
+    "                                @      ",
     " ====================================  "
+  ],
+  [
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "    +           +                      mm                      ",
+    "                                       mm                      ",
+    "             s   s   +   s  +          mm                      ",
+    "    +           +                     mm                       ",
+    "    ==  oo  ==   ====                                          ",
+    "      ^   ^   +   ^  +                      t       w          ",
+    " ==========================   ================      ======     "
+
   ],
 ]
 scene("game", ({ level } = { level: 0 }) => {
@@ -67,7 +86,7 @@ scene("game", ({ level } = { level: 0 }) => {
       solid(),
       "portal"
     ],
-    "a": () => [
+    "t": () => [
       sprite("portal"),
       "block",
       area(),
@@ -80,7 +99,7 @@ scene("game", ({ level } = { level: 0 }) => {
       area(),
       solid(),
       scale(1)
-      // body(),
+    
     ],
     "$": () => [
       sprite("grass"),
@@ -90,7 +109,7 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(1)
     ],
 
-    "^": () => [
+    "s": () => [
       sprite("s"),
       "enemy",
       "snake",
@@ -108,7 +127,7 @@ scene("game", ({ level } = { level: 0 }) => {
       body(),
     
     ],
-    "b": () => [
+    "w": () => [
       sprite("coin"),
       area(),
       body(),
@@ -120,7 +139,7 @@ scene("game", ({ level } = { level: 0 }) => {
       area(),
       body(),
 
-    ], "#": () => [
+    ], "o": () => [
       sprite("rock"),
       "block",
       area(),
@@ -129,7 +148,7 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(0.2)
     ],
     
-    "(": () => [
+    "^": () => [
       sprite("spike"),
       "spikes",
       area(),
@@ -185,8 +204,9 @@ scene("game", ({ level } = { level: 0 }) => {
 
   })
 
-
-
+  hero.onCollide("win", () => {
+    go("win")
+  })
   //player moving levels logic
   hero.onCollide("portal", () => {
     //go to scene, not maps
@@ -196,12 +216,12 @@ scene("game", ({ level } = { level: 0 }) => {
     })
   })
   hero.onCollide("troll", () => {
-    go("game")
+    go("game", {
+      level: level = 0
+    })
   })
 
-  hero.onCollide("win", () => {
-    go("win")
-  })
+  
 
 
   //temp space to set interval time for gorilla jump and down follow line 95
@@ -240,7 +260,4 @@ scene("game", ({ level } = { level: 0 }) => {
 let music = play("Chill", {
   volume: 5,
   loop: true,
-})
-onKeyPress("m", () => {
-  music.pause()
 })
