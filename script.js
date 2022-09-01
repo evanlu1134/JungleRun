@@ -4,6 +4,9 @@ kaboom()
 let score = 0;
 const HERO_SPEED = 350;
 
+
+
+
 const maps = [
   [
     "                                                                                                       ",
@@ -14,8 +17,8 @@ const maps = [
     "                                                                                                       ",
     "      +  #   +   + ^                                                                                   ", 
     "         #       ====                    ####                                                          ",
-    "                      +   ^      + #     #  a                               ^               @          ",
-    " $$$$(( $$$$$$$$$$$$$$$$$$$$$     ($$$$$$$$$$$$$$$$     (  $$$$$  $$$$$ ((( $$$$$$$  ^                 ",
+    "                    +   ^      + #     #  a                               ^                          ",
+    " $$$$(( $$$$$$$$$$$$$$$$$$$$$     ($$$$$$$$$$$$$$$$     (  $$$$$  $$$$$ ((( $$$$$$$  ^       @          ",
     " ===========================   ================       ======  ===== ==== ========= ====      ====   "
 
   ],
@@ -28,8 +31,24 @@ const maps = [
     "                                      ",
     "    +     +      +                    ",
     "    =========   ====       ==         ",
-    "                                  b   ",
+    "                                  @   ",
     " ====================================  "
+  ],
+  [
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "    +           +                      mm                ",
+    "                                      mm                   ",
+    "             ^   ^   +   ^  +          mm                ",
+    "    +           +                                       ",
+    "    ==   #  ==   ====                                    ",
+    "      ^   ^   +   ^  +                      a       b          ",
+    " ==========================   ================      ======    "
+
   ],
 ]
 scene("game", ({ level } = { level: 0 }) => {
@@ -185,8 +204,9 @@ scene("game", ({ level } = { level: 0 }) => {
 
   })
 
-
-
+  hero.onCollide("win", () => {
+    go("win")
+  })
   //player moving levels logic
   hero.onCollide("portal", () => {
     //go to scene, not maps
@@ -196,12 +216,12 @@ scene("game", ({ level } = { level: 0 }) => {
     })
   })
   hero.onCollide("troll", () => {
-    go("game")
+    go("game", {
+      level: level = 0
+    })
   })
 
-  hero.onCollide("win", () => {
-    go("win")
-  })
+  
 
 
   //temp space to set interval time for gorilla jump and down follow line 95
@@ -240,7 +260,4 @@ scene("game", ({ level } = { level: 0 }) => {
 let music = play("Chill", {
   volume: 5,
   loop: true,
-})
-onKeyPress("m", () => {
-  music.pause()
 })
