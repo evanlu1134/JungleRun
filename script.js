@@ -1,25 +1,25 @@
 
 kaboom()
-isFullscreen()
+
 let score = 0;
 const HERO_SPEED = 350;
 
 
-const maps = [
+
+
+congit st maps = [
   [
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "                                                                ",
-    "    g           g                                               ",
-    "                                        mm                      ",
-    "        g    s   s   g   s  g         mmm                        ",
-    "    g          g                    mmm = m                      ",
-    "     ==  o   ==   ====                ==                         ",
-    "  $$  ^   ^   $   ^  $          $$          t         @           ",
-    " ==========================   ================         =          "
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "                                                                                                        ",
+    "         o                                                                                              ",
+    "      +  o   +   + s                                         oo                                           ", 
+    "         o       ====                    ooooo               oo                                           ",
+    "                    +   s        + o     o   t               oo             s                             ",
+    " $$$$^^ $$$$$$$$$$$$$$$$$$$$$     ^$$$$$$$$$$$$$$$$     ^^^$$$$$    $$$$$ ^^^  $$$$$$$  s       @          ",
+    " ===========================     ================     =========      ===== ==== ========= ====    ====       "
 
   ],
   [
@@ -29,27 +29,28 @@ const maps = [
     "                                       ",
     "                                       ",
     "                                       ",
-    "    g     g      g                     ",
+    "    +     +      +                     ",
     "    =========   ====       ==          ",
     "                                @      ",
     " ====================================  "
   ],
   [
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "      g  o   g   g s                                                                                    ", 
-    "         o       ====                    ooooo                                                          ",
-    "                    +   g      + o     o     o                            s                             ",
-    " $$$$^^ $$$$$$$$$$$$$$$$$$$$$     ^$$$$$$$$$$$$$$$$     ^  $$$$$  $$$$$ ^^^ $$$$$$$  s       w          ",
-    " ===========================   ================       ======  ===== ==== ========= ====      ====       "
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "    +           +                      mm                      ",
+    "                                       mm                      ",
+    "             s   s   +   s  +          mm                      ",
+    "    +           +                     mm                       ",
+    "    ==  oo  ==   ====                                          ",
+    "      ^   ^   +   ^  +                      t       w          ",
+    " ==========================   ================      ======     "
 
   ],
 ]
-
 scene("game", ({ level } = { level: 0 }) => {
   let background = add([
     sprite("JUNGLE"),
@@ -100,16 +101,23 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(1)
     
     ],
+    "$": () => [
+      sprite("grass"),
+      "block",
+      area(),
+      body(),
+      scale(1)
+    ],
+
     "s": () => [
       sprite("s"),
       "enemy",
       "snake",
       area(),
       body(),
-
     ],
 
-    "g": () => [
+    "+": () => [
       sprite("gorilla"),
       "gor",
       "enemy",
@@ -117,7 +125,6 @@ scene("game", ({ level } = { level: 0 }) => {
       solid(),
       patrol(),
       body(),
-      scale(.8),
     
     ],
     "w": () => [
@@ -154,10 +161,9 @@ scene("game", ({ level } = { level: 0 }) => {
   //timer 
   const timer = add([
   	text(0),
-    scale(0.7),
   	pos(0, 0),
   	fixed(),
-  	{ time: 120},
+  	{ time: 30},
   ])
 
   timer.onUpdate(() => {
@@ -170,16 +176,11 @@ scene("game", ({ level } = { level: 0 }) => {
 
   const scoreboard = add([
     text("Score:" + score),
-    scale(0.7),
+    scale(.7),
     pos(0, 50),
     fixed(),
   ])
-  const levelDisplay = add([
-    text(`Level: ${level + 1}`),
-    scale(0.7),
-    pos(1250, 0),
-    fixed(),
-  ])
+
 // hero 
   const hero = add([
     sprite("run"),
@@ -220,6 +221,8 @@ scene("game", ({ level } = { level: 0 }) => {
     })
   })
 
+  
+
 
   //temp space to set interval time for gorilla jump and down follow line 95
 
@@ -253,8 +256,8 @@ scene("game", ({ level } = { level: 0 }) => {
   })
 })
 
+
 let music = play("Chill", {
-  volume: 3,
+  volume: 5,
   loop: true,
 })
-
