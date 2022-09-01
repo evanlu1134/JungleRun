@@ -1,12 +1,12 @@
 
 kaboom()
-
 let score = 0;
 const HERO_SPEED = 350;
 
 
 const maps = [
   [
+<<<<<<< HEAD
 
     "                                                                                                        ",
     "                                                                                                        ",
@@ -21,6 +21,21 @@ const maps = [
     " ===========================      ================     =========      ===== ==== ========= ====    ====  "
 
 
+=======
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                                                        ",
+    "                g                      ooo              ",
+    "                                       ooo               ",
+    "             ^   o       ^  g          ooo               ",
+    "    g           g                                       ",
+    "    ==   s  ==   ====                               @    ",
+    "              g   ^  g                      t          ",
+    " ==========================   ================      ==== "
+>>>>>>> 1b0c786a2802a407067d9b9e93e89433ed6b9edc
   ],
   [
     "                                       ",
@@ -29,7 +44,7 @@ const maps = [
     "                                       ",
     "                                       ",
     "                                       ",
-    "    +     +      +                     ",
+    "    g     g      g                     ",
     "    =========   ====       ==          ",
     "                                @      ",
     " ====================================  "
@@ -41,9 +56,9 @@ const maps = [
     "                                                                                                        ",
     "                                                                                                        ",
     "                                                                                                        ",
-    "      +  o   +   + s                                                                                    ", 
+    "      g  o   g   g s                                                                                    ", 
     "         o       ====                    ooooo                                                          ",
-    "                    +   s      + o     o     o                            s                             ",
+    "                    +   g      + o     o     o                            s                             ",
     " $$$$^^ $$$$$$$$$$$$$$$$$$$$$     ^$$$$$$$$$$$$$$$$     ^  $$$$$  $$$$$ ^^^ $$$$$$$  s       w          ",
     " ===========================   ================       ======  ===== ==== ========= ====      ====       "
 
@@ -100,23 +115,16 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(1)
     
     ],
-    "$": () => [
-      sprite("grass"),
-      "block",
-      area(),
-      body(),
-      scale(1)
-    ],
-
     "s": () => [
       sprite("s"),
       "enemy",
       "snake",
       area(),
       body(),
+
     ],
 
-    "+": () => [
+    "g": () => [
       sprite("gorilla"),
       "gor",
       "enemy",
@@ -173,7 +181,7 @@ scene("game", ({ level } = { level: 0 }) => {
     scale(0.7),
   	pos(0, 0),
   	fixed(),
-  	{ time: 30},
+  	{ time: 120},
   ])
 
 
@@ -237,8 +245,6 @@ scene("game", ({ level } = { level: 0 }) => {
     })
   })
 
-  
-
 
   //temp space to set interval time for gorilla jump and down follow line 95
 
@@ -272,8 +278,8 @@ scene("game", ({ level } = { level: 0 }) => {
   })
 })
 
-
 let music = play("Chill", {
-  volume: 5,
+  volume: 3,
   loop: true,
 })
+
