@@ -4,53 +4,55 @@ let score = 0;
 const HERO_SPEED = 350;
 
 
+
 const maps = [
   [
 
-
     "                                                        ",
     "                                                        ",
     "                                                        ",
     "                                                        ",
     "                                                        ",
     "                                                        ",
-    "                g                      ooo              ",
+    "                +                      ooo              ",
     "                                       ooo               ",
-    "             ^   o       ^  g          ooo               ",
-    "    g           g                                       ",
-    "    ==   s  ==   ====                               @    ",
-    "              g   ^  g                      t          ",
+    "             ^   o       ^             o                 ",
+    "    +           +                                       ",
+    "    ==   s  ==   ====         o                     @    ",
+    "              +   ^  +        o          t               ",
     " ==========================   ================      ==== "
 
   ],
+  // [
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "    +     +      +                     ",
+  //   "    =========   ====       ==          ",
+  //   "                                @      ",
+  //   " ====================================  "
+  // ],
   [
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "    g     g      g                     ",
-    "    =========   ====       ==          ",
-    "                                @      ",
-    " ====================================  "
-  ],
-  [
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "                                                                                                        ",
-    "      g  o   g   g s                                                                                    ", 
-    "         o       ====                    ooooo                                                          ",
-    "                    +   g      + o     o     o                            s                             ",
-    " $$$$^^ $$$$$$$$$$$$$$$$$$$$$     ^$$$$$$$$$$$$$$$$     ^  $$$$$  $$$$$ ^^^ $$$$$$$  s       w          ",
-    " ===========================   ================       ======  ===== ==== ========= ====      ====       "
+    
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                                                               ",
+    "                +                      oo                      ",
+    "                                       oo                      ",
+    "             s   s       s       +     oo                      ",
+    "        o       +                      oo                      ",
+    "    ==  o   ==   ====                                          ",
+    "      ^   ^   +   ^  +        o                     w          ",
+    " ==========================   ================      ======     "
 
   ],
 ]
-
 scene("game", ({ level } = { level: 0 }) => {
   let background = add([
     sprite("JUNGLE"),
@@ -101,16 +103,23 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(1)
     
     ],
+    "$": () => [
+      sprite("grass"),
+      "block",
+      area(),
+      body(),
+      scale(1)
+    ],
+
     "s": () => [
       sprite("s"),
       "enemy",
       "snake",
       area(),
       body(),
-
     ],
 
-    "g": () => [
+    "+": () => [
       sprite("gorilla"),
       "gor",
       "enemy",
@@ -119,7 +128,6 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(0.8),
       patrol(),
       body(),
-      scale(.8),
     
     ],
     "w": () => [
@@ -153,15 +161,7 @@ scene("game", ({ level } = { level: 0 }) => {
 
 
   }
-  //timer 
-
-  // const timer = add([
-  // 	text(0),
-  // 	pos(0, 0),
-  // 	fixed(),
-  // 	{ time: 30},
-  // ])
-
+   // timer 
   const timer = add([
   	text(0),
     scale(0.7),
@@ -170,14 +170,13 @@ scene("game", ({ level } = { level: 0 }) => {
   	{ time: 120},
   ])
 
-
-  // timer.onUpdate(() => {
-  // 	timer.time -= dt()
-  // 	timer.text = "Timer:" + timer.time.toFixed(2)
-  //   if(timer.time <= 0){
-  //     go("lose")
-  //   }
-  // })
+  timer.onUpdate(() => {
+  	timer.time -= dt()
+  	timer.text = "Timer:" + timer.time.toFixed(2)
+    if(timer.time <= 0){
+      go("lose")
+    }
+  })
 
   const scoreboard = add([
     text("Score:" + score),
@@ -188,9 +187,10 @@ scene("game", ({ level } = { level: 0 }) => {
   const levelDisplay = add([
     text(`Level: ${level + 1}`),
     scale(0.7),
-    pos(1250, 0),
+    pos(0, 100),
     fixed(),
   ])
+
 // hero 
   const hero = add([
     sprite("run"),
@@ -231,6 +231,8 @@ scene("game", ({ level } = { level: 0 }) => {
     })
   })
 
+  
+
 
   //temp space to set interval time for gorilla jump and down follow line 95
 
@@ -247,7 +249,7 @@ scene("game", ({ level } = { level: 0 }) => {
       go("lose")
     } else {
       score++
-      scoreboard.text = "score " + score
+      scoreboard.text = "Score " + score
       enemy.destroy()
       hero.jump(1000)
     }
@@ -264,8 +266,8 @@ scene("game", ({ level } = { level: 0 }) => {
   })
 })
 
+
 let music = play("Chill", {
-  volume: 3,
+  volume: 5,
   loop: true,
 })
-
