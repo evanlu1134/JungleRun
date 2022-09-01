@@ -8,6 +8,7 @@ const HERO_SPEED = 350;
 
 const maps = [
   [
+
     "                                                        ",
     "                                                        ",
     "                                                        ",
@@ -124,6 +125,7 @@ scene("game", ({ level } = { level: 0 }) => {
       "enemy",
       area(),
       solid(),
+      scale(0.8),
       patrol(),
       body(),
     
@@ -160,6 +162,14 @@ scene("game", ({ level } = { level: 0 }) => {
 
   }
   //timer 
+
+  // const timer = add([
+  // 	text(0),
+  // 	pos(0, 0),
+  // 	fixed(),
+  // 	{ time: 30},
+  // ])
+
   const timer = add([
   	text(0),
   	pos(0, 0),
@@ -167,13 +177,14 @@ scene("game", ({ level } = { level: 0 }) => {
   	{ time: 30},
   ])
 
-  timer.onUpdate(() => {
-  	timer.time -= dt()
-  	timer.text = "Timer:" + timer.time.toFixed(2)
-    if(timer.time <= 0){
-      go("lose")
-    }
-  })
+
+  // timer.onUpdate(() => {
+  // 	timer.time -= dt()
+  // 	timer.text = "Timer:" + timer.time.toFixed(2)
+  //   if(timer.time <= 0){
+  //     go("lose")
+  //   }
+  // })
 
   const scoreboard = add([
     text("Score:" + score),
