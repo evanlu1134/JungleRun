@@ -140,20 +140,20 @@ scene("game", ({ level } = { level: 0 }) => {
 
   }
   //timer 
-  const timer = add([
-  	text(0),
-  	pos(0, 0),
-  	fixed(),
-  	{ time: 30},
-  ])
+  // const timer = add([
+  // 	text(0),
+  // 	pos(0, 0),
+  // 	fixed(),
+  // 	{ time: 30},
+  // ])
 
-  timer.onUpdate(() => {
-  	timer.time -= dt()
-  	timer.text = "Timer:" + timer.time.toFixed(2)
-    if(timer.time <= 0){
-      go("lose")
-    }
-  })
+  // timer.onUpdate(() => {
+  // 	timer.time -= dt()
+  // 	timer.text = "Timer:" + timer.time.toFixed(2)
+  //   if(timer.time <= 0){
+  //     go("lose")
+  //   }
+  // })
 
   const scoreboard = add([
     text("Score:" + score),
