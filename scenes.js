@@ -8,20 +8,21 @@ scene("win", () => {
       scale(2),
       fixed()
     ])
-    add([
-      text("You Win!🎯" + "\n" + "You conquered the Jungle!"),
+    let winText = add([
+      text(`You Win!\n"You conquered the Jungle!\n\nScored:${score}`),
       origin("center"),
       color(hsl2rgb((score * 10) / 255, 0.6, 0.7)),
       pos(width() / 2, height() / 2),
       scale(1),
-      fixed()
+      fixed(),
     ])
   
     keyPress("space", () => {
-      go("game")
-  
+      go("game"),
+        score = 0
     })
   })
+
   //starting scene 
   scene("title", () => {
     let titleScreen = add([
@@ -74,14 +75,12 @@ scene("win", () => {
       fixed()
     ])
     add([
-      text("You Lose" + "\n" + "\n" + "Press Space to Retry"),
+      text("You Lose" + "\n" + "\n" + "Space to Retry"),
       color(255, 5, 0),
       origin("center"),
       pos(width() / 2, height() / 2)
     ])
     keyPress("space", () => {
-      score = 0;
-
       go("game")
   
     })
