@@ -23,6 +23,7 @@ scene("win", () => {
     })
   })
 
+
   //starting scene 
   scene("title", () => {
     let titleScreen = add([
@@ -81,7 +82,7 @@ scene("win", () => {
       pos(width() / 2, height() / 2)
     ])
     keyPress("space", () => {
-      go("game")
+      go("game"),
       score = 0
     })
   })
