@@ -15,40 +15,40 @@ const maps = [
     "                                                        ",
     "                                                        ",
     "                                                        ",
-    "                g                      ooo              ",
+    "                +                      ooo              ",
     "                                       ooo               ",
-    "             ^   o       ^  g          ooo               ",
-    "    g           g                                       ",
-    "    ==   s  ==   ====                               @    ",
-    "              g   ^  g                      t          ",
+    "             ^   o       ^             o                 ",
+    "    +           +                                       ",
+    "    ==   s  ==   ====         o                     @    ",
+    "              +   ^  +        o          t               ",
     " ==========================   ================      ==== "
 
   ],
+  // [
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "                                       ",
+  //   "    +     +      +                     ",
+  //   "    =========   ====       ==          ",
+  //   "                                @      ",
+  //   " ====================================  "
+  // ],
   [
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "                                       ",
-    "    +     +      +                     ",
-    "    =========   ====       ==          ",
-    "                                @      ",
-    " ====================================  "
-  ],
-  [
     "                                                               ",
     "                                                               ",
     "                                                               ",
     "                                                               ",
     "                                                               ",
     "                                                               ",
-    "    +           +                      mm                      ",
-    "                                       mm                      ",
-    "             s   s   +   s  +          mm                      ",
-    "    +           +                     mm                       ",
-    "    ==  oo  ==   ====                                          ",
-    "      ^   ^   +   ^  +                      t       w          ",
+    "                +                      oo                      ",
+    "                                       oo                      ",
+    "             s   s       s       +     oo                      ",
+    "        o       +                      oo                      ",
+    "    ==  o   ==   ====                                          ",
+    "      ^   ^   +   ^  +        o                     w          ",
     " ==========================   ================      ======     "
 
   ],
@@ -161,35 +161,33 @@ scene("game", ({ level } = { level: 0 }) => {
 
 
   }
-  //timer 
-
-  // const timer = add([
-  // 	text(0),
-  // 	pos(0, 0),
-  // 	fixed(),
-  // 	{ time: 30},
-  // ])
-
+   // timer 
   const timer = add([
   	text(0),
+    scale(0.7),
   	pos(0, 0),
   	fixed(),
-  	{ time: 30},
+  	{ time: 120},
   ])
 
-
-  // timer.onUpdate(() => {
-  // 	timer.time -= dt()
-  // 	timer.text = "Timer:" + timer.time.toFixed(2)
-  //   if(timer.time <= 0){
-  //     go("lose")
-  //   }
-  // })
+  timer.onUpdate(() => {
+  	timer.time -= dt()
+  	timer.text = "Timer:" + timer.time.toFixed(2)
+    if(timer.time <= 0){
+      go("lose")
+    }
+  })
 
   const scoreboard = add([
     text("Score:" + score),
-    scale(.7),
+    scale(0.7),
     pos(0, 50),
+    fixed(),
+  ])
+  const levelDisplay = add([
+    text(`Level: ${level + 1}`),
+    scale(0.7),
+    pos(0, 100),
     fixed(),
   ])
 
@@ -251,7 +249,7 @@ scene("game", ({ level } = { level: 0 }) => {
       go("lose")
     } else {
       score++
-      scoreboard.text = "score " + score
+      scoreboard.text = "Score " + score
       enemy.destroy()
       hero.jump(1000)
     }
