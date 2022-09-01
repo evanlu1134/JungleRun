@@ -241,11 +241,17 @@ scene("game", ({ level } = { level: 0 }) => {
   })
   onKeyDown("space", () => {
     if (hero.grounded()) {
+       play("Jump", {
+        volume: 5,   
+    })
       hero.jump(900, 0)
     }
   })
   hero.onCollide("enemy", (enemy) => {
     if (enemy.pos.y < hero.pos.y) {
+      play("Jump", {
+        volume: 5,   
+    })
       go("lose")
     } else {
       score++

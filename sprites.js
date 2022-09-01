@@ -14,3 +14,4 @@ loadSprite("spike", "images/spike.png");
 loadSprite("HTP", "images/HTP.png");
 loadSound("junglemp3", "images/junglemp3.mp3");
 loadSound("Chill", "images/Chill.mp3");
+loadSound("Jump", "images/jump.mp3")
