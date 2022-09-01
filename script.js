@@ -1,24 +1,25 @@
 
 kaboom()
+isFullscreen()
 let score = 0;
 const HERO_SPEED = 350;
 
 
 const maps = [
   [
-    "                                                               ",
-    "                                                               ",
-    "                                                               ",
-    "                                       **                      ",
-    "                                                               ",
-    "                                                               ",
-    "    g           g                      mm                      ",
-    "                                       mm                      ",
-    "        g    s   s   g   s  g          mm                      ",
-    "    g          g                    mmm  m                     ",
-    "    ==  o   ==   ====                                          ",
-    "  ++  ^   ^   +   ^  +          **          t       @          ",
-    " ==========================   ================      ======     "
+    "                                                                ",
+    "                                                                ",
+    "                                                                ",
+    "                                                                ",
+    "                                                                ",
+    "                                                                ",
+    "    g           g                                               ",
+    "                                        mm                      ",
+    "        g    s   s   g   s  g         mmm                        ",
+    "    g          g                    mmm = m                      ",
+    "     ==  o   ==   ====                ==                         ",
+    "  $$  ^   ^   $   ^  $          $$          t         @           ",
+    " ==========================   ================         =          "
 
   ],
   [
@@ -99,15 +100,6 @@ scene("game", ({ level } = { level: 0 }) => {
       scale(1)
     
     ],
-    "+": () => [
-      sprite("gb"),
-      "block",
-      area(),
-      solid(),
-      body(),
-      scale(2),
-    ],
-
     "s": () => [
       sprite("s"),
       "enemy",
@@ -165,7 +157,7 @@ scene("game", ({ level } = { level: 0 }) => {
     scale(0.7),
   	pos(0, 0),
   	fixed(),
-  	{ time: 30},
+  	{ time: 120},
   ])
 
   timer.onUpdate(() => {
@@ -262,7 +254,7 @@ scene("game", ({ level } = { level: 0 }) => {
 })
 
 let music = play("Chill", {
-  volume: 5,
+  volume: 3,
   loop: true,
 })
 

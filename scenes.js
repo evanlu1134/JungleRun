@@ -82,7 +82,7 @@ scene("win", () => {
     ])
     keyPress("space", () => {
       go("game")
-  
+      score = 0
     })
   })
   go("title")
