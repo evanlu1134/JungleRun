@@ -249,7 +249,7 @@ scene("game", ({ level } = { level: 0 }) => {
   })
   hero.onCollide("enemy", (enemy) => {
     if (enemy.pos.y < hero.pos.y) {
-      play("Jump", {
+      play("ough", {
         volume: 5,   
     })
       go("lose")
@@ -261,6 +261,9 @@ scene("game", ({ level } = { level: 0 }) => {
     }
   })
   hero.onCollide("spikes", (enemy) => {
+    play("ough", {
+      volume: 5,   
+  })
       go("lose")
     
   })
