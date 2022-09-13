@@ -5,7 +5,7 @@ scene("win", () => {
       sprite("trees"),
       pos(width() / 2, height() / 2),
       origin("center"),
-      scale(2),
+      scale(3),
       fixed()
     ])
     let winText = add([
@@ -72,7 +72,7 @@ scene("win", () => {
       sprite("trees"),
       pos(width() / 2, height() / 2),
       origin("center"),
-      scale(2),
+      scale(3),
       fixed()
     ])
     add([

@@ -58,8 +58,9 @@ scene("game", ({ level } = { level: 0 }) => {
     sprite("JUNGLE"),
     pos(width() / 2, height() / 2),
     origin("center"),
-    scale(2.2),
-    fixed()
+    scale(3),
+    fixed(),
+    color(127, 200, 255)
   ])
   function patrol(speed = 60, dir = 1) {
     return {
